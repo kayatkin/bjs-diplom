@@ -32,7 +32,7 @@ function fetchCurrencyRates() {
 function updateCurrencyRates(currencyRates) {
   
   ratesBoard.clearTable();
-  ratesBoard.fillTable(currencyRates);
+  ratesBoard.fillTable(currencyRates.data);
 }
 
 fetchCurrencyRates();
@@ -101,7 +101,7 @@ ApiConnector.getFavorites((response) => {
     
     favoritesWidget.clearTable();
     favoritesWidget.fillTable(response.data);
-    favoritesWidget.updateUsersList(response.data);
+    moneyManager.updateUsersList(response.data);
   } else {
     console.error('Ошибка при получении списка избранного:', response.error);
     
@@ -116,7 +116,6 @@ favoritesWidget.addUserCallback = (userData) => {
       
       favoritesWidget.clearTable();
       favoritesWidget.fillTable(response.data);
-      favoritesWidget.updateUsersList(response.data);
       
       favoritesWidget.setMessage(true, 'Пользователь успешно добавлен в избранное.');
     } else {
@@ -134,8 +133,7 @@ favoritesWidget.removeUserCallback = (userId) => {
       
       favoritesWidget.clearTable();
       favoritesWidget.fillTable(response.data);
-      favoritesWidget.updateUsersList(response.data);
-      
+            
       favoritesWidget.setMessage(true, 'Пользователь успешно удален из избранного.');
     } else {
       console.error('Ошибка при удалении пользователя из избранного:', response.error);
